@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+
+.header {
+    background-color: #efefef;
+     padding: 5px;
+ }
+
+ .logo{
+     border-width: 1px;
+    /* border-color: white; */
+    display: flex;
+    
+ }
+ 
+ .logo-img {
+     height: 60px;
+     
+ }
+ 
+ nav {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0 20px;
+ }
+ 
+ .nav-ul {
+     list-style: none;
+     display: flex;
+     gap: 20px;
+ }
+ 
+ .nav-link  {
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+     font-weight: 400;
+     padding: 5px 10px;
+     transition: background-color 0.3s;
+     text-decoration: none;
+     color: #710000;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out; 
+ }
+ 
+ .navbar-nav a:hover {
+     background-color: #710000;
+     color: white;
+     border-radius: 5px;
+ }
+ .navbar-toggler{
+     color: #710000;
+ }
+ .navbar-toggler-icon{
+   color: #710000;
+ }
+
+ .text-check-box{
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+ }
+.title{
+    font-family: "Montserrat", serif;
+}
+.btn{
+    background-color: #FF8000;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.btn:hover{
+    background-color: green;
+    color: white;
+}

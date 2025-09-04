@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/public/styles/AdminDash.css"/>
+  <title>Admin | Dashboard</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg bg-maroon fixed-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/public/img/logo-img-removebg-preview.png" alt="Logo" class="logo-img me-2">
+        <span class="text-white fw-bold">Admin Dashboard</span>
+      </a>
+      <!-- Hamburger -->
+      <button class="btn text-white d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar" aria-controls="sidebar" aria-expanded="false">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" role="button" aria-label="Close sidebar overlay"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-3 col-lg-2 sidebar d-flex flex-column" id="sidebar">
+        <nav class="mt-2">
+          <a href="#" class="nav-link active" data-section="dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+          <a href="#" class="nav-link" data-section="manageStudents"><i class="bi bi-people"></i> Manage Students</a>
+          <a href="#" class="nav-link" data-section="manageTeachers"><i class="bi bi-person-badge"></i> Manage Teachers</a>
+          <a href="#" class="nav-link" data-section="manageSections"><i class="bi bi-diagram-3"></i> Manage Sections</a>
+          <a href="#" class="nav-link" data-section="manageSubjects"><i class="bi bi-book"></i> Manage Subjects</a>
+          <a href="#" class="nav-link" data-section="schoolYear"><i class="bi bi-calendar-event"></i> School Year Calendar</a>
+          <a href="#" class="nav-link" data-section="gradeDates"><i class="bi bi-calendar-check"></i> Set Grade Input Dates</a>
+          <a href="#" class="nav-link" data-section="reports"><i class="bi bi-file-earmark-bar-graph"></i> Reports</a>
+           <a href="#" class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </nav>
+        <!-- <div class="logout-btn mt-auto pt-2">
+         
+        </div> -->
+      </aside>
+
+      <!-- Content -->
+      <main class="col-md-9 col-lg-10 content">
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="section visible">
+          <h2 class="mb-3">Welcome, Admin</h2>
+          <div class="row g-3 mt-1">
+            <div class="col-sm-6 col-md-3">
+              <div class="card p-3 text-center">
+                <h6 class="text-muted mb-1">Total Students</h6>
+                <p class="fs-4 fw-bold" id="statStudents">—</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card p-3 text-center">
+                <h6 class="text-muted mb-1">Total Teachers</h6>
+                <p class="fs-4 fw-bold" id="statTeachers">—</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card p-3 text-center">
+                <h6 class="text-muted mb-1">Total Sections</h6>
+                <p class="fs-4 fw-bold" id="statSections">—</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card p-3 text-center">
+                <h6 class="text-muted mb-1">Total Subjects</h6>
+                <p class="fs-4 fw-bold" id="statSubjects">—</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="card p-4">
+              <h5 class="mb-2">School Year Calendar</h5>
+              <p class="mb-3 text-muted">Set and manage the school year (e.g., SY 2025–2026).</p>
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalSchoolYear">Set School Year</button>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="card p-4">
+              <h5 class="mb-2">Set Grade Input Dates</h5>
+              <p class="mb-3 text-muted">Configure quarter & semester windows for grade encoding.</p>
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalGradeDates">Set Dates</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE STUDENTS -->
+        <section id="manageStudents" class="section">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h4 class="mb-2 mb-sm-0">Manage Students</h4>
+            <div class="d-flex gap-2">
+              <input type="search" class="form-control form-control-sm" placeholder="Search student…" id="studentSearch">
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddStudent"><i class="bi bi-person-plus"></i> Add Student</button>
+            </div>
+          </div>
+
+          <div class="card p-3">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Grade</th>
+                    <th>Section</th>
+                    <th>Gender</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE TEACHERS -->
+        <section id="manageTeachers" class="section">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h4 class="mb-2 mb-sm-0">Manage Teachers</h4>
+            <div class="d-flex gap-2">
+              <input type="search" class="form-control form-control-sm" placeholder="Search teacher…" id="teacherSearch">
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddTeacher"><i class="bi bi-person-plus"></i> Add Teacher</button>
+            </div>
+          </div>
+
+          <div class="card p-3">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="teachersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE SUBJECTS -->
+        <section id="manageSubjects" class="section">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h4 class="mb-2 mb-sm-0">Manage Subjects</h4>
+            <div class="d-flex gap-2">
+              <input type="search" class="form-control form-control-sm" placeholder="Search subject…" id="subjectSearch">
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddSubject"><i class="bi bi-plus-circle"></i> Add Subject</button>
+            </div>
+          </div>
+
+          <div class="card p-3">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Code</th>
+                    <th>Subject Name</th>
+                    <th>Grade Level</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="subjectsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE SECTIONS -->
+        <section id="manageSections" class="section">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h4 class="mb-2 mb-sm-0">Manage Sections</h4>
+            <div class="d-flex gap-2">
+              <select id="sectionGradeFilter" class="form-select form-select-sm">
+                <option value="All">All Grades</option>
+                <option value="7">Grade 7</option>2
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+              </select>
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddSection"><i class="bi bi-plus-circle"></i> Add Section</button>
+            </div>
+          </div>
+
+          <!-- Section list -->
+          <div class="row g-3" id="sectionsGrid"></div>
+
+          <!-- Section detail (adviser + students) -->
+          <div id="sectionDetail" class="card p-3 mt-4 d-none">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <h5 class="mb-0" id="secDetailName">Section</h5>
+                <small class="text-muted">Adviser: <span id="secDetailAdviser">—</span></small>
+              </div>
+              <button class="btn btn-outline-secondary btn-sm" id="closeSectionDetail"><i class="bi bi-x-lg"></i> Close</button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="sectionStudentsBody"></tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between">
+              <small class="text-muted">Sorted by last name • Capacity: <span id="secCapCount">0</span>/50</small>
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddStudentToSection"><i class="bi bi-person-plus"></i> Add Student</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCHOOL YEAR CALENDAR -->
+        <section id="schoolYear" class="section">
+          <h4 class="mb-3">School Year Calendar</h4>
+          <div class="card p-4">
+            <form id="schoolYearForm" class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">School Year (e.g., 2025–2026)</label>
+                <input type="text" class="form-control" id="syInput" placeholder="2025-2026" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Start Month</label>
+                <input type="month" class="form-control" id="syStart" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">End Month</label>
+                <input type="month" class="form-control" id="syEnd" required>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-danger" type="submit">Save School Year</button>
+              </div>
+            </form>
+            <hr>
+            <div id="syPreview" class="text-muted">No school year set.</div>
+          </div>
+        </section>
+
+        <!-- SET GRADE INPUT DATES -->
+        <section id="gradeDates" class="section">
+          <h4 class="mb-3">Set Grade Input Dates</h4>
+          <div class="card p-4">
+            <ul class="nav nav-pills mb-3" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabJHS" type="button" role="tab">Grades 7–10 (Quarters)</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabSHS" type="button" role="tab">Grades 11–12 (Semesters)</button>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <!-- Quarters -->
+              <div id="tabJHS" class="tab-pane fade show active" role="tabpanel">
+                <form id="formQuarters" class="row g-3">
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Quarter (From)</label>
+                    <input type="date" class="form-control" id="q1From" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Quarter (To)</label>
+                    <input type="date" class="form-control" id="q1To" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Quarter (From)</label>
+                    <input type="date" class="form-control" id="q2From" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Quarter (To)</label>
+                    <input type="date" class="form-control" id="q2To" required>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-danger" type="submit">Save Quarter Dates</button>
+                  </div>
+                </form>
+              </div>
+              <!-- Semesters -->
+              <div id="tabSHS" class="tab-pane fade" role="tabpanel">
+                <form id="formSemesters" class="row g-3">
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Sem – Prelim (From)</label>
+                    <input type="date" class="form-control" id="prelimFrom" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Sem – Prelim (To)</label>
+                    <input type="date" class="form-control" id="prelimTo" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Sem – Midterm (From)</label>
+                    <input type="date" class="form-control" id="midtermFrom" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">1st Sem – Midterm (To)</label>
+                    <input type="date" class="form-control" id="midtermTo" required>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Sem – Semi-Finals (From)</label>
+                    <input type="date" class="form-control" id="semifinalsFrom" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Sem – Semi-Finals (To)</label>
+                    <input type="date" class="form-control" id="semifinalsTo" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Sem – Finals (From)</label>
+                    <input type="date" class="form-control" id="finalsFrom" required>
+                  </div>
+                  <div class="col-md-6 col-lg-3">
+                    <label class="form-label">2nd Sem – Finals (To)</label>
+                    <input type="date" class="form-control" id="finalsTo" required>
+                  </div>
+
+                  <div class="col-12">
+                    <button class="btn btn-danger" type="submit">Save Semester Dates</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <hr>
+            <div id="gradeDatesPreview" class="text-muted">No grade windows set.</div>
+          </div>
+        </section>
+
+        <!-- REPORTS -->
+        <section id="reports" class="section">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h4 class="mb-2 mb-sm-0">Reports</h4>
+            <div class="d-flex gap-2">
+              <select id="reportFilter" class="form-select form-select-sm">
+                <option value="Pending">Pending Re-Attempts</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="All">All</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card p-3">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Teacher</th>
+                    <th>Subject</th>
+                    <th>Grade Level</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="reportsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- =============== MODALS =============== -->
+
+  <!-- Add / Edit Student -->
+  <div class="modal fade" id="modalAddStudent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formAddStudent">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-person-plus"></i> Add Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-6">
+            <label class="form-label">Student ID</label>
+            <input type="text" class="form-control" id="stuId" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="stuGender" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" id="stuFirst" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="stuLast" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Grade</label>
+            <select class="form-select" id="stuGrade" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option>
+              <option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Section</label>
+            <select class="form-select" id="stuSection" required></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Transfer / Edit student in Section Detail -->
+  <div class="modal fade" id="modalTransferStudent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formTransferStudent">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-arrow-left-right"></i> Transfer Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <input type="hidden" id="transferStudentId">
+          <div class="col-12">
+            <label class="form-label">Move to Section</label>
+            <select class="form-select" id="transferTargetSection" required></select>
+            <small class="text-muted">Capacity limit: 50 per section.</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Transfer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Teacher -->
+  <div class="modal fade" id="modalAddTeacher" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formAddTeacher">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-person-plus"></i> Add Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-6">
+            <label class="form-label">Teacher ID</label>
+            <input type="text" class="form-control" id="tchId" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="tchEmail" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" id="tchFirst" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="tchLast" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-control" id="tchSubject" placeholder="e.g., Mathematics" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Subject -->
+  <div class="modal fade" id="modalAddSubject" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formAddSubject">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-plus-circle"></i> Add Subject</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-6">
+            <label class="form-label">Code</label>
+            <input type="text" class="form-control" id="subjCode" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Grade Level</label>
+            <select class="form-select" id="subjGrade" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option>
+              <option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Subject Name</label>
+            <input type="text" class="form-control" id="subjName" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Section -->
+  <div class="modal fade" id="modalAddSection" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formAddSection">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-diagram-3"></i> Add Section</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-6">
+            <label class="form-label">Grade</label>
+            <select class="form-select" id="secGrade" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option>
+              <option>11</option><option>12</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Section Name</label>
+            <input type="text" class="form-control" id="secName" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Adviser Name</label>
+            <input type="text" class="form-control" id="secAdviser" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Student directly to Section -->
+  <div class="modal fade" id="modalAddStudentToSection" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" id="formAddStudentToSection">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-person-plus"></i> Add Student to Section</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-6">
+            <label class="form-label">Student ID</label>
+            <input type="text" class="form-control" id="secAddStuId" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Gender</label>
+            <select class="form-select" id="secAddStuGender" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>Male</option><option>Female</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" id="secAddStuFirst" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="secAddStuLast" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+          <button class="btn btn-danger" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- School Year quick modal (from dashboard buttons) -->
+  <div class="modal fade" id="modalSchoolYear" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-calendar-event"></i> School Year</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">You can also configure this in the <strong>School Year Calendar</strong> page.</p>
+          <form id="modalSchoolYearForm" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">School Year</label>
+              <input type="text" class="form-control" id="mSyInput" placeholder="2025-2026" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Start Month</label>
+              <input type="month" class="form-control" id="mSyStart" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">End Month</label>
+              <input type="month" class="form-control" id="mSyEnd" required>
+            </div>
+            <div class="col-12 mt-2">
+              <button class="btn btn-danger w-100" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grade dates quick modal (from dashboard buttons) -->
+  <div class="modal fade" id="modalGradeDates" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-calendar-check"></i> Grade Input Dates</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-3">Same fields available in the <strong>Set Grade Input Dates</strong> page.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">1st Quarter (From)</label>
+              <input type="date" class="form-control" id="mQ1From">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">1st Quarter (To)</label>
+              <input type="date" class="form-control" id="mQ1To">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">2nd Quarter (From)</label>
+              <input type="date" class="form-control" id="mQ2From">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">2nd Quarter (To)</label>
+              <input type="date" class="form-control" id="mQ2To">
+            </div>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-danger w-100" id="btnQuickSaveGradeDates" type="button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/public/script/AdminDash.js"></script>
+</body>
+</html>

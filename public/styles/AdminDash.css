@@ -1,0 +1,182 @@
+
+body {
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+/* =====================
+   Header
+===================== */
+.bg-maroon {
+   background-color: #8f0000 !important; 
+  }
+.logo-img {
+   height: 40px; border-radius: 50%; background-color: #f5f5f5; 
+  }
+
+/* =====================
+   Sidebar
+===================== */
+.sidebar {
+  background-color: #8f0000;
+  color: white;
+  min-height: 100vh;
+  padding: 1.25rem 0.8rem;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  position: fixed;
+  top: 56px; /* match navbar height */
+  left: 0;
+  z-index: 1050;
+  width: 200px; /* 🔹 compact sidebar */
+  display: flex;
+  flex-direction: column;
+}
+.sidebar nav { 
+  margin-top: .25rem;
+ }
+.sidebar .nav-link {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.92rem;
+}
+.sidebar .nav-link:hover {
+  background-color: #fff;
+  color: #8f0000;
+  padding-left: 14px;
+}
+.sidebar .nav-link.active {
+  background-color: #fff;
+  color: #8f0000;
+  border-left: 4px solid #BE8400;
+  padding-left: 14px;
+}
+/* Breathing space from header */
+.sidebar nav .nav-link:first-child {
+   margin-top: 6px; 
+  }
+
+/* Logout always at bottom */
+.logout-btn {
+   margin-top: auto;
+   }
+.logout-btn .nav-link {
+  opacity: .95;
+  background: rgba(255,255,255,0.1);
+}
+.logout-btn .nav-link:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.2);
+}
+
+/* =====================
+   Overlay (Mobile)
+===================== */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1040;
+}
+#overlay.show { 
+  display: block; 
+}
+
+/* =====================
+   Content Area
+===================== */
+.content {
+  margin-top: 72px; /* clear header */
+  margin-left: 200px; /* match sidebar */
+  padding-bottom: 2rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+@media (max-width: 991px) {
+  .content {
+     margin-left: 0; 
+    }
+}
+
+/* =====================
+   Mobile Sidebar
+===================== */
+@media (max-width: 991px) {
+  #sidebar {
+    right: -220px; left: auto; /* slide from right */
+    width: 200px;
+    opacity: 0;
+  }
+  #sidebar.active { 
+    right: 0; opacity: 1; 
+  }
+}
+
+/* =====================
+   Hamburger Button
+===================== */
+#sidebarToggle {
+  border: none; background: transparent; cursor: pointer; padding: 6px 8px;
+}
+#sidebarToggle .bar {
+  display: block; width: 26px; height: 3px; margin: 5px 0;
+  background-color: #fff; border-radius: 5px; transition: all .3s ease;
+}
+#sidebarToggle.change .bar:nth-child(1) { 
+  transform: rotate(45deg) translate(5px, 6px); 
+}
+#sidebarToggle.change .bar:nth-child(2) {
+   opacity: 0; 
+}
+#sidebarToggle.change .bar:nth-child(3) { 
+  transform: rotate(-45deg) translate(6px, -7px); 
+}
+
+/* =====================
+   Sections Visibility
+===================== */
+.section {
+   display: none; 
+}
+.section.visible { 
+  display: block; 
+}
+
+/* =====================
+   Cards
+===================== */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+
+/* =====================
+   Section Grid Cards
+===================== */
+.section-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+.section-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* =====================
+   Utilities
+===================== */
+.table td, .table th {
+  vertical-align: middle;
+  font-size: 0.9rem;
+}

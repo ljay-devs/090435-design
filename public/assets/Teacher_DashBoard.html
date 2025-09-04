@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/styles/Teaher_Dash.css">
+    <link rel="icon" type="image/x-icon" href="/public/img/logohead-icon.jpg">
+    <title>Teacher | DashBoard</title>
+</head>
+<body>
+   <header class="d-none d-lg-block header shadow-sm py-2 px-4 border-bottom">
+    <div class="container-fluid d-flex align-items-center">
+      <img class="logo-img" src="/public/img/logo-img-removebg-preview.png" alt="Logo" height="60">
+      <h6 class="ms-3 fw-bold mb-0 text-maroon">MSEUF-CI<br>TEACHER DASHBOARD</h6>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-expand-lg mobile-navbar">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-3">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/public/img/logo-img-removebg-preview.png" alt="Logo" height="50" />
+        <span class="ms-2 text-white">MSEUF-CI<br>TEACHER DASHBOARD</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="collapse bg-white text-center p-3 mobile-navbar" id="mobileSidebar">
+    <button class="btn" onclick="showSection('subjects')"><i class="bi bi-journal-text me-2"></i>Subjects</button>
+    <button class="btn" onclick="showSection('profile')"><i class="bi bi-person me-2"></i>View Profile</button>
+    <button class="btn"><i class="bi bi-box-arrow-right me-2"></i>Log Out</button>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 sidebar desktop-sidebar">
+        <div class="nav-section">
+          <button class="btn" onclick="showSection('subjects')"><i class="bi bi-journal-text me-2"></i>Subjects</button>
+          <button class="btn" onclick="showSection('profile')"><i class="bi bi-person me-2"></i>View Profile</button>
+        </div>
+        <div>
+          <button class="btn"><i class="bi bi-box-arrow-right me-2"></i>Log Out</button>
+        </div>
+      </div>
+
+      <div class="col-lg-10">
+        <div id="subjects" class="section-content">
+          <h4>Subjects</h4>
+          <div class="subject-card" onclick="openSubject('English', '9')">
+            <div><h5>ENGLISH</h5><small>GRADE: 9</small></div>
+            <button class="arrow-btn"><i class="bi bi-arrow-right"></i></button>
+          </div>
+          <div class="subject-card" onclick="openSubject('Math', '10')">
+            <div><h5>MATHEMATICS</h5><small>GRADE: 10</small></div>
+            <button class="arrow-btn"><i class="bi bi-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div id="studentListView" class="section-content d-none">
+          <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+            <div>
+              <h4 id="subjectTitle">Subject</h4>
+              <p id="gradeInfo">Grade: -</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <label for="sectionSelect" class="form-label m-0">Section:</label>
+              <select id="sectionSelect" class="form-select form-select-sm" style="width:auto" onchange="loadStudents(this.value)">
+                <option value="Ruby">Ruby</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Sapphire">Sapphire</option>
+              </select>
+              <button class="btn btn-light" onclick="goBackToSubjects()">← Back</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered bg-white text-dark">
+              <thead class="table-danger">
+                <tr>
+                  <th>STUDENT ID</th>
+                  <th>STUDENT NAME</th>
+                  <th>GRADES</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="text-end mt-3">
+            <button class="save-btn">Save</button>
+          </div>
+        </div>
+
+        <div id="profile" class="section-content d-none">
+          <h4>Teacher Profile</h4>
+          <p><strong>Name:</strong> Mr. Santos</p>
+          <p><strong>Email:</strong> santos@example.com</p>
+          <p><strong>Position:</strong> Subject Teacher</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/public/script/Teacher_DashFunc.js">
+  
+  </script>
+</body>
+</html>

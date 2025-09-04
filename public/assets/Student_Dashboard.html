@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student | Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/styles/StudentDashboard.css">
+</head>
+<body>
+
+   <!-- Header -->
+  <header class="d-none d-lg-block header shadow-sm py-2 px-4 border-bottom">
+    <div class="container-fluid d-flex align-items-center">
+      <img class="logo-img" src="/public/img/logo-img-removebg-preview.png" alt="Logo" height="60">
+      <h6 class="ms-3 fw-bold mb-0 text-maroon">MSEUF-CI<br>STUDENT DASHBOARD</h6>
+    </div>
+  </header>
+
+  <!-- Mobile Navbar -->
+  <nav class="navbar navbar-expand-lg mobile-navbar">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-3">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/public/img/logo-img-removebg-preview.png" alt="Logo" height="50" />
+        <span class="ms-2">MSEUF-CI<br>STUDENT DASHBOARD</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar -->
+  <div class="collapse bg-white text-center p-3 mobile-navbar" id="mobileSidebar">
+    <button class="btn" onclick="showSection('grades')"><i class="bi bi-journal-text"></i> Grades</button>
+    <button class="btn" onclick="showSection('achievements')"><i class="bi bi-award"></i> Achievements</button>
+    <button class="btn" onclick="showSection('profile')"><i class="bi bi-person"></i> View Profile</button>
+    <button class="btn"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+  </div>
+
+  <!-- Layout -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-2 sidebar desktop-sidebar">
+        <div class="nav-section">
+          <button class="btn" onclick="showSection('grades')"><i class="bi bi-journal-text"></i> Grades</button>
+          <button class="btn" onclick="showSection('achievements')"><i class="bi bi-award"></i> Achievements</button>
+          <button class="btn" onclick="showSection('profile')"><i class="bi bi-person"></i> View Profile</button>
+        </div>
+        <div>
+          <button class="btn"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-10">
+        <div id="profile" class="section-content">
+          <div class="card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4>Student Information</h4>
+              <button class="edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
+            </div>
+            <p><strong>Name:</strong> Juan Dela Cruz</p>
+            <p><strong>Grade:</strong> 9</p>
+            <p><strong>Section:</strong> Ruby</p>
+            <p><strong>Student ID:</strong> S21-1234</p>
+            <p><strong>Email:</strong> juanexample@gmail.com</p>
+            <a href="#" class="change-password">Change Password</a>
+          </div>
+        </div>
+
+        <div id="grades" class="section-content d-none">
+          <div class="card">
+            <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+              <div>
+                <button class="btn dropdown-toggle" data-bs-toggle="dropdown">S.Y 2024-2025</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2023-2024</a></li>
+                </ul>
+              </div>
+              <div>
+                <button class="btn dropdown-toggle" data-bs-toggle="dropdown">1st Quarter</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2nd Quarter</a></li>
+                </ul>
+              </div>
+              <div class="gen-ave">Gen Ave: 92</div>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead><tr><th>SUBJECT</th><th>GRADES</th></tr></thead>
+                <tbody>
+                  <tr><td>ENGLISH<br><small>Teacher:</small></td><td>99</td></tr>
+                  <tr><td>FILIPINO<br><small>Teacher:</small></td><td>88</td></tr>
+                  <tr><td>MATH<br><small>Teacher:</small></td><td>88</td></tr>
+                  <tr><td>MAPEH<br><small>Teacher:</small></td><td>99</td></tr>
+                  <tr><td>AP<br><small>Teacher:</small></td><td>85</td></tr>
+                  <tr><td>TLE<br><small>Teacher:</small></td><td>98</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="achievements" class="section-content d-none">
+          <div class="card">
+            <h4>Achievements</h4>
+            <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+              <div>
+                <button class="btn dropdown-toggle" data-bs-toggle="dropdown">S.Y 2024-2025</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2023-2024</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead><tr><th>Quarter</th><th>Average</th><th>Honor</th></tr></thead>
+                <tbody>
+                  <tr><td>1<sup>st</sup> Quarter</td><td>90</td><td>With Honor</td></tr>
+                  <tr><td>2<sup>nd</sup> Quarter</td><td>96</td><td>With High Honor</td></tr>
+                  <tr><td>3<sup>rd</sup> Quarter</td><td>89</td><td>With Honor</td></tr>
+                  <tr><td>4<sup>th</sup> Quarter</td><td>-</td><td>-</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showSection(section) {
+      const sections = ['profile', 'grades', 'achievements'];
+      const buttons = document.querySelectorAll('.sidebar .btn, .mobile-navbar .btn');
+
+      sections.forEach(id => document.getElementById(id).classList.add('d-none'));
+      document.getElementById(section).classList.remove('d-none');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick')?.includes(section)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

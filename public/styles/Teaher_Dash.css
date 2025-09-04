@@ -1,0 +1,161 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #EFEFEF;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+h6{
+  color: #EFEFEF;
+}
+.logo-img {
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-color: white;
+}
+
+.header {
+  background-color: #8f0000;
+}
+
+.navbar {
+  background-color: #8f0000;
+  padding: 0.7rem 1rem;
+}
+
+.sidebar {
+  background-color: #8f0000;
+  color: white;
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .nav-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .btn,
+.mobile-navbar .btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  padding: 10px 16px;
+}
+
+.sidebar .btn:hover,
+.mobile-navbar .btn:hover {
+  background-color: #8f0000;
+  color: #fff;
+  padding-left: 20px;
+}
+
+.sidebar .btn.active,
+.mobile-navbar .btn.active {
+  background-color: #fff;
+  color: #8f0000;
+  font-weight: bold;
+  border-left: 4px solid #BE8400;
+}
+
+.section-content {
+  padding: 2rem;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+}
+
+.subject-card {
+  background-color: white;
+  color: #8f0000;
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.subject-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.arrow-btn {
+  background-color: #fff;
+  color: #8f0000;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+}
+
+.save-btn {
+  background-color: #8f0000;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 0.4rem 2rem;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #a10000;
+  transform: scale(1.05);
+}
+
+@media (max-width: 991.98px) {
+  .desktop-sidebar {
+    display: none;
+  }
+
+      .mobile-navbar .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: #EFEFEF;
+        color: #8f0000;
+        font-weight: 600;
+    }
+}
+  .mobile-navbar .navbar-brand img {
+    height: 45px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 3px;
+  }
+
+  .mobile-navbar .navbar-brand span {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 10px;
+    line-height: 1.2;
+  }
+
+  .section-content {
+    padding: 1rem;
+    background-color: #EFEFEF;
+  }
+
+
+@media (min-width: 992px) {
+  .mobile-navbar {
+    display: none;
+  }
+}
